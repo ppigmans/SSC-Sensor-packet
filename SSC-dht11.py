@@ -15,12 +15,12 @@ import json
 # host = ip van server
 # user = gebruikersnaam gekoppeled aan de MQTT node van node-red
 
-host = '192.168.11.21'
-user = 'test'
+host = '172.16.85.250'
+user = 'weather-station'
 
 # hier wordt aangegeven om de hoeveel seconden de code opnieuw moet uitgevoert worden
 
-INTERVAL=2
+INTERVAL=5
 
 #hoe de data wordt verzonden, in dit geval puur het getal.
 sensor_temp = {0}
@@ -51,8 +51,8 @@ try:
         sensor_hum = humidity
 
         # Sending humidity and temperature data to ThingsBoard
-        client.publish('lv', json.dumps(sensor_hum), 1)
-		client.publish('temp', json.dumps(sensor_temp), 1)
+        client.publish('WS/lv', json.dumps(sensor_hum), 1)
+	client.publish('WS/temp', json.dumps(sensor_temp), 1)
 
         next_reading += INTERVAL
         sleep_time = next_reading-time.time()
